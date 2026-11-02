@@ -1,16 +1,16 @@
 {
   "summary": {
     "label": "before",
-    "n": 21,
-    "format_rate": 0.09523809523809523,
+    "n": 9,
+    "format_rate": 0.0,
     "content_rate": 0.0,
     "both_rate": 0.0,
-    "seconds": 58.9
+    "seconds": 43.8
   },
   "rows": [
     {
-      "question": "提出の期限は？",
-      "raw": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "question": "「LLM」とは何ですか？",
+      "raw": "{\"answer\": \"LLM は大規模言語モデル（Large Language Model）の略語で、大規模言語モデルの一種です。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -18,8 +18,8 @@
       "gold_needs_review": false
     },
     {
-      "question": "提出期限の日付と時刻を教えてください",
-      "raw": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "question": "「プロンプト」とは何ですか？",
+      "raw": "{\"answer\": \"プロンプトは、AI に指示を出すためのテキストのことで、AI がその指示に従って回答する際に必要となる情報です。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -27,8 +27,8 @@
       "gold_needs_review": false
     },
     {
-      "question": "課題の締切は何月何日の何時ですか",
-      "raw": "{\"answer\": \"9 月 30 日 23:59\"}",
+      "question": "「ハルシネーション」とは何ですか？",
+      "raw": "{\"answer\": \"ハルシネーションとは、光の波長が波長を多めに変化させる現象です。光の波長が波長を多めに変化させる現象は、ハルシネーションです。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -36,8 +36,8 @@
       "gold_needs_review": false
     },
     {
-      "question": "提出場所は？",
-      "raw": "{\"answer\": \"学習ポータルの「課題」欄\"}",
+      "question": "大規模言語モデルって簡単に言うと何？",
+      "raw": "{\"answer\": \"大規模言語モデルは、非常に多くの言語を学習・訓練し、自然言語処理（NLP）の分野で広く使われる AI モデルです。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -45,8 +45,8 @@
       "gold_needs_review": false
     },
     {
-      "question": "課題の提出はどこで行いますか",
-      "raw": "{\"answer\": \"学習ポータルの「課題」欄で提出先を指定し、PDF 1 ファイルで提出します。提出時間は毎週火曜 17:00〜18:00 のオフィスアワーで行います。\"}",
+      "question": "LLMへの指示文（プロンプト）の意味を教えて",
+      "raw": "{\"answer\": \"LLM への指示文（プロンプト）は、大規模言語モデルが学習した知識や能力を参照して、ユーザーの要求をどのように処理・解釈・生成するかのルールを定義するものです。これにより、モデルが特定のタスク（例：コード作成、文章作成、数式計算など）に対して正確かつ効率的に回答できるようになります。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -54,98 +54,17 @@
       "gold_needs_review": false
     },
     {
-      "question": "提出物を出す先を教えてください",
-      "raw": "{\"answer\": \"学習ポータルの「課題」欄\"}",
+      "question": "AIが嘘をつく幻覚（ハルシネーション）って何？",
+      "raw": "{\"answer\": \"AI が嘘をつく幻覚（ハルシネーション）とは、AI が特定の条件や入力に基づいて生成した結果として、現実の物理法則や数学的規則を破り、自らの生成内容に矛盾する「幻覚」を指します。これは、AI の学習データに含まれる誤情報や、学習アルゴリズムのバイアス、あるいは生成プロセスの非確定性によって生じる現象であり、現実の",
       "format_ok": false,
-      "format_reason": "missing_key",
+      "format_reason": "json_error: JSONDecodeError",
       "content_ok": false,
       "both_ok": false,
       "gold_needs_review": false
     },
     {
-      "question": "PDF 以外でも出せますか",
-      "raw": "{\"answer\": \"確認が必要\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "提出するファイルの形式は何ですか",
-      "raw": "{\"answer\": \"PDF 1 ファイルで、ファイル名は 学籍番号_課題番号.pdf です\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "提出ファイルは何形式で、いくつ出しますか",
-      "raw": "{\"answer\": \"PDF 1 ファイルで、1 出します\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "相談できる時間帯は？",
-      "raw": "{\"answer\": \"火曜 17:00〜18:00 のオフィスアワー\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "オフィスアワーの曜日と時間を教えてください",
-      "raw": "{\"answer\": \"火曜 17:00〜18:00\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "質問を受け付けてもらえるのは何曜日の何時からですか",
-      "raw": "{\"answer\": \"火曜 17:00〜18:00\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "締切後の扱いを教えてください",
-      "raw": "{\"answer\": \"期限後 48 時間以内なら減点のうえ受け付けます。\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "提出が締切に間に合わなかったらどうなりますか",
-      "raw": "{\"answer\": \"期限から 48 時間以内なら減点のうえ受け付けます\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "期限後に提出した課題は受理されますか",
-      "raw": "{\"answer\": \"確認が必要\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": false
-    },
-    {
-      "question": "成績はいつ出ますか",
-      "raw": "{\"answer\": \"確認が必要\"}",
+      "question": "「Python」とは何ですか？",
+      "raw": "{\"answer\": \"Python は、プログラミング言語の一つで、Python 言語の正式名称は「Python」というものです。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -153,17 +72,8 @@
       "gold_needs_review": true
     },
     {
-      "question": "講義の録画は公開されますか",
-      "raw": "{\"answer\": \"否\", \"needs_review\": false}",
-      "format_ok": true,
-      "format_reason": "",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": true
-    },
-    {
-      "question": "課題の文字数に制限はありますか",
-      "raw": "{\"answer\": \"なし\"}",
+      "question": "Google Colabの使い方を教えて",
+      "raw": "{\"answer\": \"Google Colab は、Python のコードを実行するための無料のクラウドコンピューティングサービスです。ブラウザで開くことで、ノートブックやコードを編集し、実行して結果を表示できます。ただし、すべての機能は必須条件を満たすか、または特定の環境（Python 3.8 以上、Google Cloud Platform へのアクセス権限など）を満たす必要があります。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
       "content_ok": false,
@@ -171,28 +81,10 @@
       "gold_needs_review": true
     },
     {
-      "question": "提出した課題へのフィードバックはもらえますか",
-      "raw": "{\"answer\": \"確認が必要\"}",
+      "question": "ディープラーニングの意味は？",
+      "raw": "{\"answer\": \"ディープラーニングは、機械学習において、人工知能の学習を深める技術です。従来の機械学習では、データが一つずつ学習する方式でしたが、ディープラーニングは、ニューラルネットワークの構造を学習する際に、データが複数回学習されることで、より複雑なパターンを学習できることを特徴としています。\"}",
       "format_ok": false,
       "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": true
-    },
-    {
-      "question": "参考文献の書き方に指定はありますか",
-      "raw": "{\"answer\": \"確認が必要\"}",
-      "format_ok": false,
-      "format_reason": "missing_key",
-      "content_ok": false,
-      "both_ok": false,
-      "gold_needs_review": true
-    },
-    {
-      "question": "オフィスアワーは事前予約が必要ですか",
-      "raw": "{\"answer\": \"否\", \"needs_review\": false}",
-      "format_ok": true,
-      "format_reason": "",
       "content_ok": false,
       "both_ok": false,
       "gold_needs_review": true
