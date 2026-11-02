@@ -12,21 +12,55 @@ import sys
 from pathlib import Path
 
 GLOSSARY = Path(__file__).resolve().parent.parent / "data" / "glossary.json"
-TEMPLATES = ["「{term}」とは何ですか？", "{term}について簡単に説明してください。"]
+# 通常の質問テンプレート
+TEMPLATES = [
+    "「{term}」とは何ですか？",
+    "{term}について簡単に説明してください。",
+    "{term}の意味を教えて。"
+]
 
+# categoryを文脈として与えるテンプレート
+CATEGORY_TEMPLATES = [
+    "{category}に関する用語「{term}」について教えてください。",
+    "講座の{category}で出てくる「{term}」とはどういう意味ですか？"
+]
 
 def main() -> None:
     terms = json.loads(GLOSSARY.read_text(encoding="utf-8"))["terms"]
+    
     for t in terms:
-        for template in TEMPLATES:
-            record = {
-                "messages": [
-                    {"role": "user", "content": template.format(term=t["term"])},
-                    {"role": "assistant", "content": t["definition"]},
-                ]
-            }
-            sys.stdout.write(json.dumps(record, ensure_ascii=False) + "\n")
-
-
+        #質問の対象とする単語リスト
+        target_words = [t["term"]] + t.get("aliases", [])
+        
+        category = t.get("category", "")
+        related = t.get("related", [])
+        
+        #回答文の作成
+        answer_text = t["definition"]
+        if related:
+            answer_text += f"\n\nあわせて確認したい関連用語: {', '.join(related)}"
+            
+        #組み合わせの全パターンを生成
+        for word in target_words:
+            #通常パターン
+            for template in TEMPLATES:
+                record = {
+                    "messages": [
+                        {"role": "user", "content": template.format(term=word)},
+                        {"role": "assistant", "content": answer_text},
+                    ]
+                }
+                sys.stdout.write(json.dumps(record, ensure_ascii=False) + "\n")
+                
+            #カテゴリ付きパターン
+            if category:
+                for template in CATEGORY_TEMPLATES:
+                    record = {
+                        "messages": [
+                            {"role": "user", "content": template.format(term=word, category=category)},
+                            {"role": "assistant", "content": answer_text},
+                        ]
+                    }
+                    sys.stdout.write(json.dumps(record, ensure_ascii=False) + "\n")
 if __name__ == "__main__":
     main()
