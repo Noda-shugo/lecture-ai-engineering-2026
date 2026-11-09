@@ -77,3 +77,24 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+def make_quiz(lecture: int) -> str:
+    """指定した回（1始まりの整数）の講義内容に関するクイズを1問返す。
+
+    ユーザーから「第X回のクイズを出して」や「復習したい」と頼まれたときに使う。
+    """
+    return f"第{lecture}回のクイズ: AIエージェントの基本構造である「モデル＋ループ＋〇〇」の〇〇に入る言葉は何でしょう？"
+
+def save_learning_log(content: str) -> str:
+    """学習の記録を learning_log フォルダにテキストファイルとして保存する。
+    
+    何か新しいことを学んだり、まとめを作成した後に記録を残すために使う。
+    """
+    log_dir = Path("learning_log")
+    log_dir.mkdir(exist_ok=True) # フォルダがなければ作る
+    
+    import time
+    filename = log_dir / f"log_{int(time.time())}.txt"
+    filename.write_text(content, encoding="utf-8")
+    
+    return f"学習記録を {filename} に保存しました。"

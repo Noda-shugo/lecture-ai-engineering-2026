@@ -16,7 +16,7 @@ import inspect
 import json
 from pathlib import Path
 
-from pydantic_ai import Agent
+from pydantic_ai import Agent, DeferredToolRequests
 from pydantic_ai.exceptions import ModelHTTPError
 from fastmcp import Client
 from pydantic_ai.mcp import MCPToolset, StdioTransport
@@ -38,10 +38,14 @@ INSTRUCTIONS = """\
 """
 
 # モデルは実行時に渡す（テストではAPIを呼ばない TestModel に差し替えるため）
-agent = Agent(instructions=INSTRUCTIONS)
+agent = Agent(
+    instructions=INSTRUCTIONS,
+    output_type=str | DeferredToolRequests
+)
 agent.tool_plain(tools.search_glossary)
 agent.tool_plain(tools.get_lecture_summary)
-
+agent.tool_plain(tools.save_learning_log, requires_approval=True)
+agent.tool_plain(tools.make_quiz)
 # TODO(第3回 演習): tools.py に make_quiz を作り、ここで登録しよう
 
 # 第5回: 使う MCP サーバーの設定ファイル。Claude Desktop や Cursor と同じ "mcpServers" 形式
@@ -128,11 +132,33 @@ def main() -> None:
     if args.mcp:
         print("[tools] MCP サーバー（app/mcp_servers.json）")
     try:
+        # 1回目の実行
         result = target.run_sync(args.question, model=build_model())
+        
+        # 結果が承認待ちかどうかの確認
+        if isinstance(result.output, DeferredToolRequests):
+            print("\n[承認待ち] のツールを実行しようとしています:")
+            
+            # ユーザーに確認する
+            answer = input("実行を許可しますか？ [y/N]: ")
+            if answer.lower() == 'y':
+                print("実行します...")
+                # ユーザーからの新しい質問は無いのでNoneを渡し、
+                # result.all_messages() でツール呼び出しまでの履歴をすべて引き継ぐ
+                result = target.run_sync(
+                    None,
+                    message_history=result.all_messages(),
+                    model=build_model()
+                )
+            else:
+                print("実行をキャンセルしました。")
+                return
     except ModelHTTPError as e:
         print(api_error_message(e.status_code, str(e.body)[:200]))
         raise SystemExit(1)
-    print(result.output)
+    # 最終的なテキスト結果を表示
+    if isinstance(result.output, str):
+        print(result.output)
     if args.trace:
         print_trace(result)
 
