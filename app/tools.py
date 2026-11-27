@@ -12,6 +12,15 @@ from app.config import api_error_message
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MAX_RESULTS = 3
+QUIZ_QUESTIONS = (
+    "APIキーをソースコードに書かず、環境変数から読み込むのはなぜでしょう？",
+    "LoRAでは、元のモデルの重みと追加した行列のうち、どちらを学習するでしょう？",
+    "AIエージェントの基本構造である「モデル＋ループ＋〇〇」の〇〇に入る言葉は何でしょう？",
+    "採点器の一致率が高くても、個々の不一致を確認したほうがよいのはなぜでしょう？",
+    "検索で正しいページが見つかったことと、そのページに基づいて回答できたことは、どう区別できるでしょう？",
+    "手元のMCPサーバーを起動する設定と、起動済みのMCPサーバーに接続する設定では、何を指定するでしょう？",
+    "Terraformで変更を適用する前に、意図しない削除がないか確認するにはどのコマンドを使うでしょう？",
+)
 
 
 @cache
@@ -86,7 +95,10 @@ def make_quiz(lecture: int) -> str:
 
     ユーザーから「第X回のクイズを出して」や「復習したい」と頼まれたときに使う。
     """
-    return f"第{lecture}回のクイズ: AIエージェントの基本構造である「モデル＋ループ＋〇〇」の〇〇に入る言葉は何でしょう？"
+    if not 1 <= lecture <= len(QUIZ_QUESTIONS):
+        return f"第{lecture}回のクイズは用意されていません。第1回〜第{len(QUIZ_QUESTIONS)}回から選んでください。"
+    return f"第{lecture}回のクイズ: {QUIZ_QUESTIONS[lecture - 1]}"
+
 
 def save_learning_log(content: str) -> str:
     """学習の記録を learning_log フォルダにテキストファイルとして保存する。

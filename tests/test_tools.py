@@ -39,6 +39,17 @@ def test_lecture_summary():
     assert "まだありません" in tools.get_lecture_summary(99)
 
 
+def test_quiz_uses_the_requested_lecture():
+    assert "APIキー" in tools.make_quiz(1)
+    assert "モデル＋ループ" in tools.make_quiz(3)
+    assert "MCP" in tools.make_quiz(6)
+    assert "Terraform" in tools.make_quiz(7)
+
+
+def test_quiz_rejects_zero_instead_of_returning_the_last_question():
+    assert "用意されていません" in tools.make_quiz(0)
+
+
 def test_default_question_of_lecture1_is_answerable_from_glossary():
     """第1回の既定の質問（app.ask）は、第3回のエージェントが用語集で正しく答えられること。"""
     from app.ask import DEFAULT_QUESTION
