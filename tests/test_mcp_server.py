@@ -55,6 +55,19 @@ def test_glossary_result_comes_back_through_mcp(tmp_path):
     assert result.output
 
 
+def test_quiz_returns_available_lectures_to_model_through_mcp(tmp_path):
+    tool = "glossary_make_quiz"
+    model = TestModel(call_tools=[tool], seed=99)
+    result = build_mcp_agent(_glossary_only_config(tmp_path)).run_sync("第99回のクイズを作って", model=model)
+
+    call, = _parts(result, ToolCallPart)
+    assert call.tool_name == tool and call.args_as_dict() == {"lecture": 99}
+    reply, = _parts(result, ToolReturnPart)
+    assert reply.tool_name == tool
+    assert "第99回のクイズは用意されていません" in str(reply.content)
+    assert "第1回〜第7回から選んでください" in str(reply.content)
+
+
 def test_describe_servers_tells_command_from_url(tmp_path):
     """コマンドで起動するサーバーと、URL で接続するサーバーを、表示で見分けられる。"""
     path = tmp_path / "mcp_servers.json"
